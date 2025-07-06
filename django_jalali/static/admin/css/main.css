@@ -1,9 +1,45 @@
+/* JalaliDatePicker custom styles for Django admin integration */
+
+/* Make the date picker container work well with Django admin */
+.jalali-datepicker-container {
+    z-index: 9999 !important;
+}
+
+/* Style adjustments for input fields */
+input[data-jdp] {
+    direction: ltr;
+    text-align: left;
+}
+
+/* RTL support for Persian content */
+.jalali-datepicker-container .jdp-dialog {
+    direction: rtl;
+    font-family: 'Tahoma', 'Segoe UI', sans-serif;
+}
+
+/* Better integration with Django admin forms */
+.vjDateField[data-jdp] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23666"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px 16px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+/* Dark theme adjustments if needed */
+@media (prefers-color-scheme: dark) {
+    .vjDateField[data-jdp] {
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ccc"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>');
+    }
+}
+
+/* Ensure proper positioning in admin forms */
+.form-row .jalali-datepicker-container {
+    position: absolute;
+}
+
+/* Legacy jQuery UI styles removal */
 span.ui-datepicker-trigger {
-    width: 16px;
-    height: 16px;
-    background: url("../jquery.ui.datepicker.jalali/themes/base/images/icon-calendar.svg") 0 0 no-repeat;
-    margin-top: auto;
-    margin-bottom: auto;
-    display: inline-block;
-    padding: 0 0 0 5px;
+    display: none;
 }

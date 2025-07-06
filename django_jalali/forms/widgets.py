@@ -5,6 +5,7 @@ import jdatetime
 from django.forms import widgets
 from django.utils import formats
 from django.utils.encoding import smart_str
+from django.utils.safestring import mark_safe
 
 
 class jDateInput(widgets.Input):
@@ -26,8 +27,15 @@ class jDateInput(widgets.Input):
         return value
 
     def render(self, name, value, attrs=None, renderer=None):
+        if attrs is None:
+            attrs = {}
+        
+        # Add data-jdp attribute for the new date picker
+        attrs['data-jdp'] = ''
+        attrs['data-jdp-only-date'] = ''
+        
         value = self._format_value(value)
-        return super().render(name, value, attrs)
+        return super().render(name, value, attrs, renderer)
 
     def _has_changed(self, initial, data):
         # If our field has show_hidden_initial=True, initial will be a string
@@ -48,11 +56,21 @@ class jDateTimeInput(widgets.Input):
     def __init__(self, attrs=None, format=None):
         super().__init__(attrs)
         if format:
-            self.format = formats
+            self.format = format
             self.manual_format = True
         else:
             self.format = formats.get_format("DATETIME_INPUT_FORMATS")[0]
             self.manual_format = False
+
+    def render(self, name, value, attrs=None, renderer=None):
+        if attrs is None:
+            attrs = {}
+        
+        # Add data-jdp attribute for datetime picker
+        attrs['data-jdp'] = ''
+        
+        value = self._format_value(value)
+        return super().render(name, value, attrs, renderer)
 
     def _format_value(self, value):
         if self.is_localized and not self.manual_format:
