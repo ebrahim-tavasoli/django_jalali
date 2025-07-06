@@ -64,7 +64,12 @@ jalaliDatepicker.startWatch({
     persianDigits: false,
     showTodayBtn: true,
     showEmptyBtn: true,
-    container: 'body'
+    container: 'body',
+    separatorChars: {
+        date: '-',      // Use dash instead of slash for dates (YYYY-MM-DD)
+        between: ' ',   // Space between date and time
+        time: ':'       // Colon for time separator
+    }
 });
 ```
 
